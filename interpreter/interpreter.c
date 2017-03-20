@@ -99,12 +99,14 @@ void ite(struct VMContext* ctx, const uint32_t instr){
     const uint8_t c = EXTRACT_B3(instr);
 
     if(ctx->r[a].value > 0)
-	pc = (uint32_t*)&buffer[b - 1];
+	pc = (uint32_t*)(&buffer + b*4 - 4);
     else
-	pc = (uint32_t*)&buffer[c - 1];
+	pc = (uint32_t*)(&buffer + c*4 - 4);
 }
 
 void jump(struct VMContext* ctx, const uint32_t instr){
+    const uint8_t a = EXTRACT_B1(instr);
+    pc = (uint32_t*)(&buffer + a*4 - 4);
 }
 
 void puts_ins(struct VMContext* ctx, const uint32_t instr){
