@@ -44,7 +44,6 @@ void puti(struct VMContext* ctx, const uint32_t instr){
    const uint8_t a = EXTRACT_B1(instr);
    const uint8_t b = EXTRACT_B2(instr);
    ctx->r[a].value = b;
-   printf("\tRegister[%x]: %x\n", a, ctx->r[a].value);
 }
 
 void add(struct VMContext* ctx, const uint32_t instr){
@@ -117,8 +116,10 @@ void puts_ins(struct VMContext* ctx, const uint32_t instr){
 }
 
 void gets_ins(struct VMContext* ctx, const uint32_t instr){
+    const uint8_t a = EXTRACT_B1(instr);
+    uint32_t addr = ctx->r[a].value;
+    scanf("%s", (char*)(data + addr));
 }
-
 
 void usageExit() {
     // show usage
@@ -192,15 +193,6 @@ int main(int argc, char** argv) {
     is_running = true;
 
     while (is_running) {
-        // Read 4-byte bytecode, and set the pc accordingly
-#if 0
-	printf("Running instr: %d -> [ '%x', '%d', '%d', '%d' ]\n", i,
-		EXTRACT_B0(*pc),
-		EXTRACT_B1(*pc),
-		EXTRACT_B2(*pc),
-		EXTRACT_B3(*pc));
-#endif
-
         stepVMContext(&vm, &pc);
 	i++;
     }
