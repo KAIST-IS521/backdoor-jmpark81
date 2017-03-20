@@ -12,13 +12,53 @@
 // Global variable that indicates if the process is running.
 static bool is_running = true;
 
-// ARITHMETIC FUNCTIONS:
+// Instructions supported by compiler
+void halt(struct VMContext* ctx, const uint32_t instr){
+}
+
+void load(struct vmcontext* ctx, const uint32_t instr){
+}
+
+void store(struct vmcontext* ctx, const uint32_t instr){
+}
+
+void move(struct vmcontext* ctx, const uint32_t instr){
+}
+
+void puti(struct vmcontext* ctx, const uint32_t instr){
+}
+
 void add(struct VMContext* ctx, const uint32_t instr){
     const uint8_t a = EXTRACT_B1(instr);
     const uint8_t b = EXTRACT_B2(instr);
     const uint8_t c = EXTRACT_B3(instr);
     ctx->r[a].value = ctx->r[b].value + ctx->r[c].value;
 }
+
+void sub(struct VMContext* ctx, const uint32_t instr){
+}
+
+void gt(struct VMContext* ctx, const uint32_t instr){
+}
+
+void ge(struct VMContext* ctx, const uint32_t instr){
+}
+
+void eq(struct VMContext* ctx, const uint32_t instr){
+}
+
+void ite(struct VMContext* ctx, const uint32_t instr){
+}
+
+void jump(struct VMContext* ctx, const uint32_t instr){
+}
+
+void puts(struct VMContext* ctx, const uint32_t instr){
+}
+
+void gets(struct VMContext* ctx, const uint32_t instr){
+}
+
 
 void usageExit() {
     // TODO: show usage
