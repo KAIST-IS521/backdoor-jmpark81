@@ -10,8 +10,9 @@
 #define NUM_FUNCS  (256)
 
 #define BUFF_SIZE  1024
+#define HEAP_SIZE  8192
 uint32_t 	code[BUFF_SIZE]; 	// memory for instructions
-uint8_t 	data[BUFF_SIZE];	// memory for data
+uint8_t 	data[HEAP_SIZE+1];	// memory for data
 uint32_t	*pc;			// program counter
 
 // Global variable that indicates if the process is running.
