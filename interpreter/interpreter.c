@@ -62,10 +62,10 @@ void ite(struct VMContext* ctx, const uint32_t instr){
 void jump(struct VMContext* ctx, const uint32_t instr){
 }
 
-void puts(struct VMContext* ctx, const uint32_t instr){
+void puts_ins(struct VMContext* ctx, const uint32_t instr){
 }
 
-void gets(struct VMContext* ctx, const uint32_t instr){
+void gets_ins(struct VMContext* ctx, const uint32_t instr){
 }
 
 
@@ -94,8 +94,8 @@ void initFuncs(FunPtr *f, uint32_t cnt) {
     f[0x90] = eq;
     f[0xa0] = ite;
     f[0xb0] = jump; 
-    f[0xc0] = puts;
-    f[0xd0] = gets;
+    f[0xc0] = puts_ins;
+    f[0xd0] = gets_ins;
 }
 
 void initRegs(Reg *r, uint32_t cnt)
