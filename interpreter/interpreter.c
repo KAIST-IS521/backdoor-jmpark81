@@ -12,6 +12,7 @@
 #define BUFF_SIZE  1024
 char buffer[BUFF_SIZE]; // memory for instructions
 char heap[BUFF_SIZE];	// memory for data
+uint32_t* pc;
 
 // Global variable that indicates if the process is running.
 static bool is_running = true;
@@ -93,6 +94,14 @@ void eq(struct VMContext* ctx, const uint32_t instr){
 }
 
 void ite(struct VMContext* ctx, const uint32_t instr){
+    const uint8_t a = EXTRACT_B1(instr);
+    const uint8_t b = EXTRACT_B2(instr);
+    const uint8_t c = EXTRACT_B3(instr);
+
+    if(ctx->r[a].value > 0)
+	pc = (uint32_t*)&buffer[b - 1];
+    else
+	pc = (uint32_t*)&buffer[c - 1];
 }
 
 void jump(struct VMContext* ctx, const uint32_t instr){
@@ -148,8 +157,6 @@ int main(int argc, char** argv) {
     Reg r[NUM_REGS];
     FunPtr f[NUM_FUNCS];
     FILE* bytecode;
-    uint32_t* pc;
-    char buffer[BUFF_SIZE];
     int i;
 
     // There should be at least one argument.
