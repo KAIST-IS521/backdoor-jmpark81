@@ -33,6 +33,9 @@ void move(struct VMContext* ctx, const uint32_t instr){
 }
 
 void puti(struct VMContext* ctx, const uint32_t instr){
+   const uint8_t a = EXTRACT_B1(instr);
+   const uint8_t b = EXTRACT_B2(instr);
+   ctx->r[a].value = b;
 }
 
 void add(struct VMContext* ctx, const uint32_t instr){
@@ -47,7 +50,6 @@ void sub(struct VMContext* ctx, const uint32_t instr){
     const uint8_t b = EXTRACT_B2(instr);
     const uint8_t c = EXTRACT_B3(instr);
     ctx->r[a].value = ctx->r[b].value - ctx->r[c].value;
-
 }
 
 void gt(struct VMContext* ctx, const uint32_t instr){
@@ -70,7 +72,6 @@ void ge(struct VMContext* ctx, const uint32_t instr){
 	ctx->r[a].value = 1;
     else
         ctx->r[a].value = 0;
-
 }
 
 void eq(struct VMContext* ctx, const uint32_t instr){
@@ -82,8 +83,6 @@ void eq(struct VMContext* ctx, const uint32_t instr){
 	ctx->r[a].value = 1;
     else
         ctx->r[a].value = 0;
-
-
 }
 
 void ite(struct VMContext* ctx, const uint32_t instr){
@@ -167,7 +166,6 @@ int main(int argc, char** argv) {
 
     // Set Program Counter (PC) to start of opcode buffer
     pc = (uint32_t*)&buffer;
-
 
     i = 0;
     is_running = true;
