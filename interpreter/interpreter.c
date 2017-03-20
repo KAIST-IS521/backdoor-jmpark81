@@ -17,16 +17,16 @@ void halt(struct VMContext* ctx, const uint32_t instr){
    is_running = false;
 }
 
-void load(struct vmcontext* ctx, const uint32_t instr){
+void load(struct VMContext* ctx, const uint32_t instr){
 }
 
-void store(struct vmcontext* ctx, const uint32_t instr){
+void store(struct VMContext* ctx, const uint32_t instr){
 }
 
-void move(struct vmcontext* ctx, const uint32_t instr){
+void move(struct VMContext* ctx, const uint32_t instr){
 }
 
-void puti(struct vmcontext* ctx, const uint32_t instr){
+void puti(struct VMContext* ctx, const uint32_t instr){
 }
 
 void add(struct VMContext* ctx, const uint32_t instr){
