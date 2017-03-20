@@ -12,6 +12,14 @@
 // Global variable that indicates if the process is running.
 static bool is_running = true;
 
+// ARITHMETIC FUNCTIONS:
+void add(struct VMContext* ctx, const uint32_t instr){
+    const uint8_t a = EXTRACT_B1(instr);
+    const uint8_t b = EXTRACT_B2(instr);
+    const uint8_t c = EXTRACT_B3(instr);
+    ctx->r[a].value = ctx->r[b].value + ctx->r[c].value;
+}
+
 void usageExit() {
     // TODO: show usage
     printf("USAGE: interpreter [FILE]\n");
