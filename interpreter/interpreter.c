@@ -70,7 +70,7 @@ void gets(struct VMContext* ctx, const uint32_t instr){
 
 
 void usageExit() {
-    // TODO: show usage
+    // show usage
     printf("USAGE: interpreter [FILE]\n");
     exit(1);
 }
