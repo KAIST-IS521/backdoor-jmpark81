@@ -1,0 +1,100 @@
+puti r75,0x49 
+puti r76,0x44
+puti r77,0x3a
+puti r0,75
+puti r1,76
+puti r2,77
+store r0,r75
+store r1,r76
+store r2,r77
+puts r0
+puti r0, 0x30
+gets r0
+puti r61,0x50
+puti r62,0x57
+puti r63,0x3a
+puti r0,61
+puti r1,62
+puti r2,63
+store r0,r61
+store r1,r62
+store r2,r63
+puts r0
+puti r0, 0x40
+gets r0
+puti r50, 0x70
+puti r51, 0x61
+puti r52, 0x73
+puti r53, 0x73
+puti r54, 0x77
+puti r55, 0x64
+puti r101, 50
+puti r102, 51
+puti r103, 52
+puti r104, 53
+puti r105, 54
+puti r106, 55
+store r101, r50
+store r102, r51
+store r103, r52
+store r104, r53
+store r105, r54
+store r106, r55
+puti r60, 0x40
+load r200, r60
+eq r3, r200, r50
+ite r3,46, 102
+puti r61, 1
+add r60, r60, r61
+load r200, r60
+eq r3, r200, r51
+ite r3, 51, 102
+puti r61, 1
+add r60, r60, r61
+load r200, r60
+eq r3, r200, r52
+ite r3, 56, 102
+puti r61, 1
+add r60, r60, r61
+load r200, r60
+eq r3, r200, r53
+ite r3, 61, 102
+puti r61, 1
+add r60, r60, r61
+load r200, r60
+eq r3, r200, r54
+ite r3, 66, 102
+puti r61, 1
+add r60, r60, r61
+load r200, r60
+eq r3, r200, r55
+ite r3, 71, 102
+puti r80, 0x53
+puti r81, 0x75
+puti r82, 0x63
+puti r83, 0x63
+puti r84, 0x65
+puti r85, 0x73
+puti r86, 0x73
+puti r87, 0x0d
+puti r88, 0x0a
+puti r200, 80
+puti r201, 81
+puti r202, 82
+puti r203, 83
+puti r204, 84
+puti r205, 85
+puti r206, 86
+puti r207, 87
+puti r208, 88
+store r200, r80
+store r201, r81
+store r202, r82
+store r203, r83
+store r204, r84
+store r205, r85
+store r206, r86
+store r207, r87
+store r208, r88
+puts r200
+halt
