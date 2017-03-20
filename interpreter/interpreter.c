@@ -34,6 +34,9 @@ void store(struct VMContext* ctx, const uint32_t instr){
 }
 
 void move(struct VMContext* ctx, const uint32_t instr){
+   const uint8_t a = EXTRACT_B1(instr);
+   const uint8_t b = EXTRACT_B2(instr);
+   ctx->r[a].value = ctx->r[b].value;
 }
 
 void puti(struct VMContext* ctx, const uint32_t instr){
