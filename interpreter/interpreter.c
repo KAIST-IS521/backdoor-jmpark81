@@ -24,6 +24,7 @@ void halt(struct VMContext* ctx, const uint32_t instr){
 void load(struct VMContext* ctx, const uint32_t instr){
    const uint8_t a = EXTRACT_B1(instr);
    const uint8_t b = EXTRACT_B2(instr);
+   ctx->r[a].value = (uint32_t)heap[ctx->r[b].value];
 }
 
 void store(struct VMContext* ctx, const uint32_t instr){
