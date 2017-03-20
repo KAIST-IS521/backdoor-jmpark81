@@ -10,9 +10,9 @@
 #define NUM_FUNCS  (256)
 
 #define BUFF_SIZE  1024
-char buffer[BUFF_SIZE]; // memory for instructions
-char heap[BUFF_SIZE];	// memory for data
-uint32_t* pc;
+uint32_t 	code[BUFF_SIZE]; 	// memory for instructions
+uint8_t 	data[BUFF_SIZE];	// memory for data
+uint32_t	*pc;			// program counter
 
 // Global variable that indicates if the process is running.
 static bool is_running = true;
@@ -25,13 +25,13 @@ void halt(struct VMContext* ctx, const uint32_t instr){
 void load(struct VMContext* ctx, const uint32_t instr){
    const uint8_t a = EXTRACT_B1(instr);
    const uint8_t b = EXTRACT_B2(instr);
-   ctx->r[a].value = (uint32_t)heap[ctx->r[b].value];
+   ctx->r[a].value = data[ctx->r[b].value];
 }
 
 void store(struct VMContext* ctx, const uint32_t instr){
    const uint8_t a = EXTRACT_B1(instr);
    const uint8_t b = EXTRACT_B2(instr);
-   heap[ctx->r[a].value] = ctx->r[b].value;
+   data[ctx->r[a].value] = ctx->r[b].value;
 }
 
 void move(struct VMContext* ctx, const uint32_t instr){
@@ -44,6 +44,7 @@ void puti(struct VMContext* ctx, const uint32_t instr){
    const uint8_t a = EXTRACT_B1(instr);
    const uint8_t b = EXTRACT_B2(instr);
    ctx->r[a].value = b;
+   printf("\tRegister[%x]: %x\n", a, ctx->r[a].value);
 }
 
 void add(struct VMContext* ctx, const uint32_t instr){
@@ -99,17 +100,20 @@ void ite(struct VMContext* ctx, const uint32_t instr){
     const uint8_t c = EXTRACT_B3(instr);
 
     if(ctx->r[a].value > 0)
-	pc = (uint32_t*)(&buffer + b*4 - 4);
+	pc = (uint32_t*)(&code[b-1]);
     else
-	pc = (uint32_t*)(&buffer + c*4 - 4);
+	pc = (uint32_t*)(&code[c-1]);
 }
 
 void jump(struct VMContext* ctx, const uint32_t instr){
     const uint8_t a = EXTRACT_B1(instr);
-    pc = (uint32_t*)(&buffer + a*4 - 4);
+    pc = (uint32_t*)(&code[a-1]);
 }
 
 void puts_ins(struct VMContext* ctx, const uint32_t instr){
+    const uint8_t a = EXTRACT_B1(instr);
+    uint32_t addr = ctx->r[a].value;
+    printf("%s\n", (char*)(data + addr));
 }
 
 void gets_ins(struct VMContext* ctx, const uint32_t instr){
@@ -178,10 +182,10 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    fread((void*)&buffer, 1, BUFF_SIZE, bytecode);
+    fread((void*)&code, 1, BUFF_SIZE, bytecode);
 
     // Set Program Counter (PC) to start of opcode buffer
-    pc = (uint32_t*)&buffer;
+    pc = code;
 
     // Start loop for execution
     i = 0;
@@ -189,11 +193,13 @@ int main(int argc, char** argv) {
 
     while (is_running) {
         // Read 4-byte bytecode, and set the pc accordingly
-	printf("Running instr: %d -> [ '%c', '%d', '%d', '%d' ]\n", i,
+#if 0
+	printf("Running instr: %d -> [ '%x', '%d', '%d', '%d' ]\n", i,
 		EXTRACT_B0(*pc),
 		EXTRACT_B1(*pc),
 		EXTRACT_B2(*pc),
 		EXTRACT_B3(*pc));
+#endif
 
         stepVMContext(&vm, &pc);
 	i++;
