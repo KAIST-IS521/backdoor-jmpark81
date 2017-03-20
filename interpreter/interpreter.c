@@ -9,6 +9,9 @@
 #define NUM_REGS   (256)
 #define NUM_FUNCS  (256)
 
+#define BUFF_SIZE  1024
+char buffer[BUFF_SIZE];
+
 // Global variable that indicates if the process is running.
 static bool is_running = true;
 
@@ -140,6 +143,8 @@ int main(int argc, char** argv) {
     FunPtr f[NUM_FUNCS];
     FILE* bytecode;
     uint32_t* pc;
+    char buffer[BUFF_SIZE];
+    int i;
 
     // There should be at least one argument.
     if (argc < 2) usageExit();
@@ -158,9 +163,25 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    fread((void*)&buffer, 1, BUFF_SIZE, bytecode);
+
+    // Set Program Counter (PC) to start of opcode buffer
+    pc = (uint32_t*)&buffer;
+
+
+    i = 0;
+    is_running = true;
+
     while (is_running) {
-        // TODO: Read 4-byte bytecode, and set the pc accordingly
+        // Read 4-byte bytecode, and set the pc accordingly
+	printf("Running instr: %d -> [ '%c', '%d', '%d', '%d' ]\n", i,
+		EXTRACT_B0(*pc),
+		EXTRACT_B1(*pc),
+		EXTRACT_B2(*pc),
+		EXTRACT_B3(*pc));
+
         stepVMContext(&vm, &pc);
+	i++;
     }
 
     fclose(bytecode);
