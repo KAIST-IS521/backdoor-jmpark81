@@ -1,0 +1,56 @@
+puti r75,0x49 
+puti r76,0x6e
+puti r77,0x70
+puti r78,0x75
+puti r79,0x74
+puti r80,0x3a
+puti r0,75
+puti r1,76
+puti r2,77
+puti r3,78
+puti r4,79
+puti r5,80
+store r0,r75
+store r1,r76
+store r2,r77
+store r3,r78
+store r4,r79
+store r5,r80
+puts r0
+puti r0, 0x30
+gets r0
+puti r0, 0x50
+gets r0
+puti r61,0x4f 
+puti r62,0x75
+puti r63,0x74
+puti r64,0x70
+puti r65,0x75
+puti r66,0x74
+puti r67,0x0a
+puti r0,61
+puti r1,62
+puti r2,63
+puti r3,64
+puti r4,65
+puti r5,66
+puti r6,67
+store r0,r61
+store r1,r62
+store r2,r63
+store r3,r64
+store r4,r65
+store r5,r66
+store r6,r67
+puts r0
+puti r100, 0x30
+puti r101, 0x50
+puti r102, 0x01
+load r200, r100
+puti r201, 0x30
+eq r0, r200, r201
+ite r0, 57, 52
+puts r101
+sub r200, r200, r102
+jump 50
+halt
