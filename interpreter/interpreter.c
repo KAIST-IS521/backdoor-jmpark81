@@ -14,6 +14,7 @@ static bool is_running = true;
 
 // Instructions supported by compiler
 void halt(struct VMContext* ctx, const uint32_t instr){
+   is_running = false;
 }
 
 void load(struct vmcontext* ctx, const uint32_t instr){
