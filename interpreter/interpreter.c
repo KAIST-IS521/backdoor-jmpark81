@@ -14,6 +14,7 @@ static bool is_running = true;
 
 void usageExit() {
     // TODO: show usage
+    printf("USAGE: interpreter [FILE]\n");
     exit(1);
 }
 
