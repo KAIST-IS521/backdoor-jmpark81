@@ -10,7 +10,8 @@
 #define NUM_FUNCS  (256)
 
 #define BUFF_SIZE  1024
-char buffer[BUFF_SIZE];
+char buffer[BUFF_SIZE]; // memory for instructions
+char heap[BUFF_SIZE];	// memory for data
 
 // Global variable that indicates if the process is running.
 static bool is_running = true;
@@ -23,7 +24,6 @@ void halt(struct VMContext* ctx, const uint32_t instr){
 void load(struct VMContext* ctx, const uint32_t instr){
    const uint8_t a = EXTRACT_B1(instr);
    const uint8_t b = EXTRACT_B2(instr);
-   ctx->r[a].value = b;
 }
 
 void store(struct VMContext* ctx, const uint32_t instr){
@@ -167,6 +167,7 @@ int main(int argc, char** argv) {
     // Set Program Counter (PC) to start of opcode buffer
     pc = (uint32_t*)&buffer;
 
+    // Start loop for execution
     i = 0;
     is_running = true;
 
