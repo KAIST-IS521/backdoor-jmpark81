@@ -59,6 +59,15 @@ void gt(struct VMContext* ctx, const uint32_t instr){
 }
 
 void ge(struct VMContext* ctx, const uint32_t instr){
+    const uint8_t a = EXTRACT_B1(instr);
+    const uint8_t b = EXTRACT_B2(instr);
+    const uint8_t c = EXTRACT_B3(instr);
+
+    if(ctx->r[b].value >= ctx->r[c].value)
+	ctx->r[a].value = 1;
+    else
+        ctx->r[a].value = 0;
+
 }
 
 void eq(struct VMContext* ctx, const uint32_t instr){
